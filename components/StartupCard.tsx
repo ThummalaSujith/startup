@@ -2,7 +2,9 @@ import React from "react";
 import { formatDate } from "@/lib/utils";
 import { EyeIcon } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image"
+import Image from "next/image";
+import { Button } from "./ui/button";
+
 const StartupCard = ({ post }: { post: StartupTypeCard }) => {
   return (
     <li className="startup-card group">
@@ -28,16 +30,36 @@ const StartupCard = ({ post }: { post: StartupTypeCard }) => {
           </Link>
         </div>
         <div>
-
-
-            <Link href={`/user/${post.author?._id}`}>
-
-                <Image src={post?.image} alt="placeholder" width={48} height={48} className="rounded-full"/>
-            </Link>
-          </div>
-         
+          <Link href={`/user/${post.author?._id}`}>
+            <Image
+              src={post?.image}
+              alt="placeholder"
+              width={48}
+              height={48}
+              className="rounded-full"
+            />
+          </Link>
         </div>
-      
+      </div>
+      <Link href={`/startup/${post._id}`}>
+        <p className="startup-card_desc">{post.description}</p>
+        <img src={post.image||null} alt="placeholder" className="startup-card_img" />
+      </Link>
+
+      <div className="flex-between gap-3 mt-5">
+        <Link href={`/?query=${post.category.toLowerCase()}`}>
+            <p className="text-16-medium">{post.category}</p>
+        
+        
+        </Link>
+        <Button className="startup-card_btn" asChild>
+
+            <Link href={`/startup/${post._id}`}>
+                Details
+            </Link>
+
+        </Button>
+      </div>
     </li>
   );
 };
