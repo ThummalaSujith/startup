@@ -16,7 +16,7 @@ export default async function Home({
       author: { _id: 1 , name:"sujith"},
       _id: 1,
       description: "This is a description",
-      image: "",
+      image: "https://www.google.com/search?q=cat&sca_esv=cd75d570c707befa&source=hp&biw=1920&bih=1079&ei=H53DZ4URuK-m1A_R05vgCg&iflsig=ACkRmUkAAAAAZ8OrL7Yi2UjLcrs6X4KnqL2J3Qd_O0WG&ved=0ahUKEwjFnOmhieqLAxW4l4kEHdHpBqwQ4dUDCBc&uact=5&oq=cat&gs_lp=EgNpbWciA2NhdDIIEAAYgAQYsQMyBRAAGIAEMg4QABiABBixAxiDARiKBTIIEAAYgAQYsQMyBRAAGIAEMg4QABiABBixAxiDARiKBTIIEAAYgAQYsQMyCBAAGIAEGLEDMggQABiABBixAzILEAAYgAQYsQMYgwFI1Q5QpghYxQtwAXgAkAEAmAE_oAGtAaoBATO4AQPIAQD4AQGKAgtnd3Mtd2l6LWltZ5gCA6ACuwGoAgCYAwKSBwEzoAe-Dg&sclient=img&udm=2#vhid=l6VeIZtweKcrUM&vssid=mosaic",
       category: "Robots",
       title: "We Robots",
     },
