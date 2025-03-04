@@ -1,6 +1,9 @@
 import Image from "next/image";
 import SearchForm from "../../components/SearchForm";
-import StartupCard from "@/components/StartupCard";
+import StartupCard, { StartupTypeCard } from "@/components/StartupCard";
+import { client } from "@/sanity/lib/client";
+import { STARTUP_QUERY } from "@/sanity/lib/queries";
+import { SanityLive, sanityFetch } from "@/sanity/lib/live";
 
 export default async function Home({
   searchParams,
@@ -9,18 +12,14 @@ export default async function Home({
 }) {
   const query = (await searchParams).query;
 
-  const posts = [
-    {
-      _createdAt: new Date(),
-      views: 55,
-      author: { _id: 1 , name:"sujith"},
-      _id: 1,
-      description: "This is a description",
-      image: "https://www.google.com/search?q=cat&sca_esv=cd75d570c707befa&source=hp&biw=1920&bih=1079&ei=H53DZ4URuK-m1A_R05vgCg&iflsig=ACkRmUkAAAAAZ8OrL7Yi2UjLcrs6X4KnqL2J3Qd_O0WG&ved=0ahUKEwjFnOmhieqLAxW4l4kEHdHpBqwQ4dUDCBc&uact=5&oq=cat&gs_lp=EgNpbWciA2NhdDIIEAAYgAQYsQMyBRAAGIAEMg4QABiABBixAxiDARiKBTIIEAAYgAQYsQMyBRAAGIAEMg4QABiABBixAxiDARiKBTIIEAAYgAQYsQMyCBAAGIAEGLEDMggQABiABBixAzILEAAYgAQYsQMYgwFI1Q5QpghYxQtwAXgAkAEAmAE_oAGtAaoBATO4AQPIAQD4AQGKAgtnd3Mtd2l6LWltZ5gCA6ACuwGoAgCYAwKSBwEzoAe-Dg&sclient=img&udm=2#vhid=l6VeIZtweKcrUM&vssid=mosaic",
-      category: "Robots",
-      title: "We Robots",
-    },
-  ];
+
+ 
+
+  const params={search:query||null}
+
+  const { data: posts } = await sanityFetch({ query: STARTUP_QUERY ,params});
+
+  console.log(JSON.stringify(posts));
 
   return (
     <>
@@ -42,16 +41,17 @@ export default async function Home({
         </p>
 
         <ul className="mt-7 card_grid">
-        {posts.length > 0 ? (
-            posts.map((post, index) => (
+          {posts.length > 0 ? (
+            posts.map((post: StartupTypeCard) => (
               <StartupCard key={post._id} post={post} />
             ))
           ) : (
             <li>No results found.</li>
           )}
-
         </ul>
       </section>
+
+      <SanityLive />
     </>
   );
 }
